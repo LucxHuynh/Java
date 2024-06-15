@@ -1,0 +1,69 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thông Tin Nhân Viên</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        table {
+            width: 100%;
+        }
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .gender-img {
+            width: 30px;
+            height: 30px;
+        }
+        .action-img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">2180608703-Huỳnh Tấn Lộc</h1>
+    <h1 class="text-center text-primary mb-4">THÔNG TIN NHÂN VIÊN</h1>
+    <div class="d-flex justify-content-between mb-3">
+        <a href="/nhanviens/new" class="btn btn-success">THÊM NHÂN VIÊN</a>
+    </div>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th class="text-danger">Mã Nhân Viên</th>
+            <th class="text-danger">Tên Nhân Viên</th>
+            <th class="text-danger">Giới Tính</th>
+            <th class="text-danger">Nơi Sinh</th>
+            <th class="text-danger">Tên Phòng</th>
+            <th class="text-danger">Lương</th>
+            <th class="text-danger">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="nhanvien : ${nhanviens}">
+            <td th:text="${nhanvien.ma_NV}"></td>
+            <td th:text="${nhanvien.ten_NV}"></td>
+            <td>
+                <img th:src="${nhanvien.phai == 'NU' ? '/images/woman.jpg' : '/images/man.jpg'}" class="gender-img"/>
+            </td>
+            <td th:text="${nhanvien.noiSinh}"></td>
+            <td th:text="${nhanvien.ma_Phong}"></td>
+            <td th:text="${nhanvien.luong}"></td>
+            <td>
+                <a th:href="@{/nhanviens/edit/{maNV}(maNV=${nhanvien.ma_NV})}" class="btn btn-success">
+                    Sửa
+                </a>
+                <a th:href="@{/nhanviens/delete/{maNV}(maNV=${nhanvien.ma_NV})}" class="btn btn-success">
+                   Xoá
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
